@@ -1,0 +1,6 @@
+{
+    "name": "dust-sensing-app",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/app"
+}
