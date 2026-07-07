@@ -8,6 +8,16 @@ services:
       - .:/app
       - node_modules:/app/node_modules
     command: sh -lc "npm install && npm run dev -- --host 0.0.0.0"
+    depends_on:
+      - api
 
+  api:
+    image: node:22-alpine
+    working_dir: /app
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./mock-server:/app
+    command: node server.mjs
 volumes:
   node_modules:
