@@ -47,7 +47,7 @@ function HomeState()
     useEffect(() => {
         let isActive = true;
 
-        const loadInitialDustValue = async (): Promise<void> => {
+        const loadDustValue = async (): Promise<void> => {
         try {
             const value = await fetchDustValueFromApi();
 
@@ -56,6 +56,7 @@ function HomeState()
             }
 
             setDustValue(value);
+            setErrorMessage(null);
         } catch (error) {
             if (!isActive) {
             return;
@@ -73,7 +74,10 @@ function HomeState()
         }
         };
 
-        void loadInitialDustValue();
+        void loadDustValue();
+         const timerId = window.setInterval(() => {
+            void loadDustValue();
+        }, 1000);
 
         return () => {
         isActive = false;
